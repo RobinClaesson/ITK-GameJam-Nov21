@@ -1,10 +1,10 @@
 # ITK-GameJam-Nov21
 Game Jam for ITK November 2021
 
-#SpaceNat
+# SpaceNat
 Help nat destroy the evil space pumpkin nat 
 
-#Controls
+# Controls
 W: Up
 S: Down
 Space: Shoot
