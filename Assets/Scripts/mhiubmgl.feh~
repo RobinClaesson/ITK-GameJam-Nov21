@@ -1,0 +1,67 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class PlayerScript : MonoBehaviour
+{
+    public float moveSpeed = 10f;
+    public float rotateSpeed = 2f;
+
+    public float cieling = 20, floor = -3;
+
+    public float maxAngle = 30;
+    public float minAngle = 0.1f;
+
+    public
+
+    // Start is called before the first frame update
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float xRotation = transform.rotation.eulerAngles.x;
+        if (Input.GetKey(KeyCode.W))
+        {
+            if (transform.position.y < cieling)
+                transform.position = new Vector3(transform.position.x, transform.position.y + moveSpeed * Time.deltaTime);
+
+            if (xRotation > 360 - maxAngle || xRotation < maxAngle)
+                transform.Rotate(new Vector3(1, 0, 0), -2* rotateSpeed * Time.deltaTime);
+
+            //Debug.Log(transform.rotation.eulerAngles);
+        }
+
+        else if (Input.GetKey(KeyCode.S))
+        {
+            if (transform.position.y > floor)
+                transform.position = new Vector3(transform.position.x, transform.position.y - moveSpeed * Time.deltaTime);
+
+            if (xRotation > 360 - maxAngle || xRotation < maxAngle)
+                transform.Rotate(new Vector3(1, 0, 0), 2*rotateSpeed * Time.deltaTime);
+        }
+
+        else if (Mathf.Abs(xRotation) > minAngle)
+        {
+            Debug.Log(xRotation);
+            if (xRotation > 180)
+                transform.Rotate(new Vector3(1, 0, 0), rotateSpeed * Time.deltaTime);
+            else
+                transform.Rotate(new Vector3(1, 0, 0), -rotateSpeed * Time.deltaTime);
+        }
+
+
+
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+}
